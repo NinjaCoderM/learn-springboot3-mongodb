@@ -22,20 +22,6 @@ public class Student {
     private Department department;
     private List<Subject> subjects;
 
-    @PersistenceCreator // vorher PersistenceConstractor // nur wenn mehrere
-    public Student(String id, String name, String email, Department department, List<Subject> subjects) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.department = department;
-        this.subjects = subjects;
-    }
-
-    public Student(String id, Department department) {
-        this.id = id;
-        this.department = department;
-    }
-
     public String getId() {
         return id;
     }
