@@ -1,12 +1,16 @@
 package at.codecrafters.learnspringbootmongodb.entity;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.PersistenceCreator;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.List;
 
+@SuppressWarnings("unused")
 @Document(collection = "student")
 public class Student {
 
@@ -14,11 +18,16 @@ public class Student {
     private String id;
 
     //@Field(name="name")
+    @NotBlank(message = "Name cannot be blank")
+    @Size(min = 2, max = 50, message = "Name must be between 2 and 50 characters")
     private String name;
 
+    @NotBlank(message = "Email cannot be blank")
+    @Email(message = "Email should be valid")
     @Field(name="mail")
     private String email;
 
+    @NotNull(message = "Department cannot be null")
     private Department department;
     private List<Subject> subjects;
 
