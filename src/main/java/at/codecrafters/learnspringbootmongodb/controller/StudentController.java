@@ -41,6 +41,16 @@ public class StudentController {
         }
     }
 
+    @GetMapping("/getByName/{name}")
+    public ResponseEntity<?> getStudentByName(@PathVariable String name) {
+        List<Student> student = studentService.getStudentByName(name);
+        if (student.isEmpty()) {
+            throw new CustomNotFoundException("Student with name: " + name + " not found");
+        } else {
+            return ResponseEntity.ok().body(student);
+        }
+    }
+
     @GetMapping("/all")
     public List<Student> getAllStudents() {
         return studentService.getAllStudents();
