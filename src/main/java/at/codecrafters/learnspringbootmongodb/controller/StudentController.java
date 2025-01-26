@@ -67,4 +67,15 @@ public class StudentController {
         }
     }
 
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteStudentById(@PathVariable String id) {
+        Optional<Student> student = studentService.getStudentById(id);
+        if(student.isPresent()) {
+            studentService.delete(student.get());
+            return ResponseEntity.ok().body("Student with ID " + id + " deleted successfully");
+        } else {
+            throw new CustomNotFoundException("Student with ID " + id + " not found");
+        }
+    }
+
 }
