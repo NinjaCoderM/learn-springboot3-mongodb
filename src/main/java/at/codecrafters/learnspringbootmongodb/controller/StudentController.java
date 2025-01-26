@@ -41,8 +41,8 @@ public class StudentController {
         }
     }
 
-    @GetMapping("/getByName/{name}")
-    public ResponseEntity<?> getStudentByName(@PathVariable String name) {
+    @GetMapping("/getByName")
+    public ResponseEntity<?> getStudentByName(@RequestParam String name) {
         List<Student> student = studentService.getStudentByName(name);
         if (student.isEmpty()) {
             throw new CustomNotFoundException("Student with name: " + name + " not found");
