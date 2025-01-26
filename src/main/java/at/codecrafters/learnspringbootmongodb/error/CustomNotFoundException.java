@@ -23,17 +23,11 @@ public class CustomNotFoundException extends RuntimeException implements ErrorRe
 
     @Override
     @NonNull
-    public String getDetailMessageCode() {
-        return ErrorResponse.super.getDetailMessageCode();
-    }
-
-    @Override
-    @NonNull
     public ProblemDetail getBody() {
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(httpStatus, getMessage());
-        problemDetail.setTitle("Resource Not Found"); // Titel des Fehlers
-        problemDetail.setProperty("timestamp", System.currentTimeMillis()); // Zusätzliche Details hinzufügen
-        problemDetail.setProperty("errorCode", "STUDENT_NOT_FOUND"); // Eigene Fehlercodes
+        problemDetail.setTitle("Resource Not Found");
+        problemDetail.setProperty("timestamp", System.currentTimeMillis());
+        problemDetail.setProperty("errorCode", "STUDENT_NOT_FOUND");
         return problemDetail;
     }
 }

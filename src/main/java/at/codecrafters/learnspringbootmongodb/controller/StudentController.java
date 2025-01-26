@@ -29,8 +29,6 @@ public class StudentController {
         if(student.isPresent()) {
             return ResponseEntity.ok().body(student.get());
         } else {
-            //return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Student with ID " + id + " not found");
-            //return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("Student with ID " + id + " not found", HttpStatus.NOT_FOUND.value()));
             throw new CustomNotFoundException("Student with ID " + id + " not found");
         }
     }
