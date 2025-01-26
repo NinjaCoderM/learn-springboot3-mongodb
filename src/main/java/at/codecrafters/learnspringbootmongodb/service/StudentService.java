@@ -3,6 +3,7 @@ package at.codecrafters.learnspringbootmongodb.service;
 import at.codecrafters.learnspringbootmongodb.entity.Student;
 import at.codecrafters.learnspringbootmongodb.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,6 +31,11 @@ public class StudentService {
         return studentRepository.findAll();
     }
 
+    public List<Student> getAllStudents(int pageNr, int pageSize) {
+        PageRequest pageRequest = PageRequest.of(pageNr-1, pageSize);
+        return studentRepository.findAll(pageRequest).getContent();
+    }
+
     public void save(Student student) {
         studentRepository.save(student);
     }
@@ -45,4 +51,6 @@ public class StudentService {
     public List<Student> getStudentByNameOrEmail(String name, String email) {
         return studentRepository.findAllByNameOrEmailOrderByName(name, email);
     }
+
+
 }

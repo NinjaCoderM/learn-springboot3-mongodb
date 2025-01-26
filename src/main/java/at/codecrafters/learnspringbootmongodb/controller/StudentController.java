@@ -76,6 +76,16 @@ public class StudentController {
         return studentService.getAllStudents();
     }
 
+    @GetMapping("/allPageable")
+    public ResponseEntity<?> getAllStudents(@RequestParam int pageNr, @RequestParam int pageSize) {
+        List<Student> student = studentService.getAllStudents(pageNr, pageSize);
+        if (student.isEmpty()) {
+            throw new CustomNotFoundException("all Students with pageNr: " + pageNr + " and " + pageSize + " is empty");
+        } else {
+            return ResponseEntity.ok().body(student);
+        }
+    }
+
     @PutMapping("/update/{id}")
     public ResponseEntity<?> updateStudent(@PathVariable String id, @Valid @RequestBody Student student, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
