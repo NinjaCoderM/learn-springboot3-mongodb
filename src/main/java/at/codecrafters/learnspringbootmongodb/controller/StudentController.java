@@ -61,6 +61,16 @@ public class StudentController {
         }
     }
 
+    @GetMapping("/studentByNameOrEmail")
+    public ResponseEntity<?> getStudentByNameOrEmail(@RequestParam String name, @RequestParam String email) {
+        List<Student> student = studentService.getStudentByNameOrEmail(name, email);
+        if (student.isEmpty()) {
+            throw new CustomNotFoundException("Student with name: " + name + " and " + email + " not found");
+        } else {
+            return ResponseEntity.ok().body(student);
+        }
+    }
+
     @GetMapping("/all")
     public List<Student> getAllStudents() {
         return studentService.getAllStudents();
