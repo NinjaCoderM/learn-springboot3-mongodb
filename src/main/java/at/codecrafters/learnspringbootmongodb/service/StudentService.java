@@ -4,6 +4,7 @@ import at.codecrafters.learnspringbootmongodb.entity.Student;
 import at.codecrafters.learnspringbootmongodb.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,7 +33,8 @@ public class StudentService {
     }
 
     public List<Student> getAllStudents(int pageNr, int pageSize) {
-        PageRequest pageRequest = PageRequest.of(pageNr-1, pageSize);
+        Sort sort = Sort.by(Sort.Direction.ASC, "name");
+        PageRequest pageRequest = PageRequest.of(pageNr-1, pageSize, sort);
         return studentRepository.findAll(pageRequest).getContent();
     }
 
@@ -49,7 +51,8 @@ public class StudentService {
     }
 
     public List<Student> getStudentByNameOrEmail(String name, String email) {
-        return studentRepository.findAllByNameOrEmailOrderByName(name, email);
+        Sort sort = Sort.by(Sort.Direction.ASC, "name");
+        return studentRepository.findAllByNameOrEmailOrderByName(name, email, sort);
     }
 
 
