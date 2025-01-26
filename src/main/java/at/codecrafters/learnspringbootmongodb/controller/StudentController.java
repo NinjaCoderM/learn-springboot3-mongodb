@@ -1,10 +1,12 @@
 package at.codecrafters.learnspringbootmongodb.controller;
 
 import at.codecrafters.learnspringbootmongodb.entity.Student;
+import at.codecrafters.learnspringbootmongodb.error.ErrorResponse;
 import at.codecrafters.learnspringbootmongodb.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,7 +30,8 @@ public class StudentController {
         if(student.isPresent()) {
             return ResponseEntity.ok().body(student.get());
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Student with ID " + id + " not found");
+            //return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Student with ID " + id + " not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("Student with ID " + id + " not found", HttpStatus.NOT_FOUND.value()));
         }
     }
 
