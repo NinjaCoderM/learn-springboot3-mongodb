@@ -59,4 +59,8 @@ public class StudentService {
     public List<Student> getStudentByDeptName(String deptName) {
         return studentRepository.findByDepartmentDepartmentName(deptName);
     }
+
+    public List<Student> getStudentBySubjectName(String subjectName) {
+        return studentRepository.findBySubjectsSubjectName(subjectName);
+    }
 }

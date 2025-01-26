@@ -125,7 +125,17 @@ public class StudentController {
     public ResponseEntity<?> getStudentByDeptName(@RequestParam String deptName) {
         List<Student> student = studentService.getStudentByDeptName(deptName);
         if (student.isEmpty()) {
-            throw new CustomNotFoundException("Student with name: " + deptName + " not found");
+            throw new CustomNotFoundException("Student with department name: " + deptName + " not found");
+        } else {
+            return ResponseEntity.ok().body(student);
+        }
+    }
+
+    @GetMapping("/studentBySubjectName")
+    public ResponseEntity<?> getStudentBySubjectName(@RequestParam String subjectName) {
+        List<Student> student = studentService.getStudentBySubjectName(subjectName);
+        if (student.isEmpty()) {
+            throw new CustomNotFoundException("Student with subject name: " + subjectName + " not found");
         } else {
             return ResponseEntity.ok().body(student);
         }
