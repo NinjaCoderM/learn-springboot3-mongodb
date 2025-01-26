@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface StudentRepository extends MongoRepository<Student, String> {
     List<Student> findAllByName(String name);
+    List<Student> findAllByNameAndEmail(String name, String email);
 }
+
