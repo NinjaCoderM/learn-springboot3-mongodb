@@ -121,4 +121,14 @@ public class StudentController {
         }
     }
 
+    @GetMapping("/studentByDepartmentName")
+    public ResponseEntity<?> getStudentByDeptName(@RequestParam String deptName) {
+        List<Student> student = studentService.getStudentByDeptName(deptName);
+        if (student.isEmpty()) {
+            throw new CustomNotFoundException("Student with name: " + deptName + " not found");
+        } else {
+            return ResponseEntity.ok().body(student);
+        }
+    }
+
 }
