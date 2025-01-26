@@ -24,7 +24,10 @@ public class StudentController {
     private StudentService studentService;
 
     @PostMapping("/create")
-    public Student createStudent(@RequestBody Student student) {
+    public Student createStudent(@Valid @RequestBody Student student, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            throw new CustomBadRequestException(Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage());
+        }
         return studentService.createStudent(student);
     }
 
