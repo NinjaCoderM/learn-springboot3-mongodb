@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -28,7 +29,10 @@ public class Student {
     private String email;
 
     @NotNull(message = "Department cannot be null")
+    @DBRef
     private Department department;
+
+    @DBRef
     private List<Subject> subjects;
 
     public String getId() {

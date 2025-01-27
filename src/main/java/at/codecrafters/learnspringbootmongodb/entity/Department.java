@@ -1,12 +1,27 @@
 package at.codecrafters.learnspringbootmongodb.entity;
 
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+@Document
 public class Department {
+
+    @Id
+    private String id;
+
     @Field(name="department_name")
     private String departmentName;
     private String location;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getDepartmentName() {
         return departmentName;

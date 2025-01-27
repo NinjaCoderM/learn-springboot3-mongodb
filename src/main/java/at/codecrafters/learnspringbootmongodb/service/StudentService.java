@@ -1,7 +1,9 @@
 package at.codecrafters.learnspringbootmongodb.service;
 
 import at.codecrafters.learnspringbootmongodb.entity.Student;
+import at.codecrafters.learnspringbootmongodb.repository.DepartmentRepository;
 import at.codecrafters.learnspringbootmongodb.repository.StudentRepository;
+import at.codecrafters.learnspringbootmongodb.repository.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -16,7 +18,19 @@ public class StudentService {
     @Autowired
     private StudentRepository studentRepository;
 
+    @Autowired
+    private DepartmentRepository departmentRepository;
+
+    @Autowired
+    private SubjectRepository subjectRepository;
+
     public Student createStudent(Student student) {
+        if(student.getDepartment() != null) {
+            departmentRepository.save(student.getDepartment());
+        }
+        if(student.getSubjects() != null && !student.getSubjects().isEmpty()) {
+            subjectRepository.saveAll(student.getSubjects());
+        }
         return studentRepository.save(student);
     }
 
