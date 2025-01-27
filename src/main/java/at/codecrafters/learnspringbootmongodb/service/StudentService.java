@@ -41,7 +41,7 @@ public class StudentService {
     }
 
     public List<Student> getStudentByName(String name) {
-        return studentRepository.findAllByName(name);
+        return studentRepository.anyNameNativeQueryAllByName(name);
     }
 
     public List<Student> getAllStudents() {
