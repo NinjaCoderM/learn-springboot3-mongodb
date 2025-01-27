@@ -1,6 +1,8 @@
 package at.codecrafters.learnspringbootmongodb.service;
 
+import at.codecrafters.learnspringbootmongodb.entity.Department;
 import at.codecrafters.learnspringbootmongodb.entity.Student;
+import at.codecrafters.learnspringbootmongodb.error.CustomNotFoundException;
 import at.codecrafters.learnspringbootmongodb.repository.DepartmentRepository;
 import at.codecrafters.learnspringbootmongodb.repository.StudentRepository;
 import at.codecrafters.learnspringbootmongodb.repository.SubjectRepository;
@@ -76,5 +78,12 @@ public class StudentService {
 
     public List<Student> getStudentBySubjectName(String subjectName) {
         return studentRepository.findBySubjectsSubjectName(subjectName);
+    }
+
+    public List<Student> getStudentByDeptId(String id) {
+        Optional<Department> depId = departmentRepository.findById(id);
+        if(depId.isEmpty()) {  throw new CustomNotFoundException("Departement with department id: " + id + " not found"); } else {
+            return studentRepository.getStudentByDepartmentId(depId.get().getId());
+        }
     }
 }

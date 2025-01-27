@@ -141,4 +141,14 @@ public class StudentController {
         }
     }
 
+    @GetMapping("/studentByDepartmentId")
+    public ResponseEntity<?> getStudentByDeptId(@RequestParam String id) {
+        List<Student> student = studentService.getStudentByDeptId(id);
+        if (student.isEmpty()) {
+            throw new CustomNotFoundException("Student with department id: " + id + " not found");
+        } else {
+            return ResponseEntity.ok().body(student);
+        }
+    }
+
 }
